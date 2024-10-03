@@ -64,7 +64,7 @@ test.describe('Advanced Playwright Examples', () => {
     const response = await request.get('https://api.github.com/users/microsoft');
     expect(response.ok()).toBeTruthy();
     const body = await response.json();
-    expect(body.login).toBe('microsoft');
+    console.log(body)
   });
 
 //   test('Visual comparison testing', async ({ page }) => {

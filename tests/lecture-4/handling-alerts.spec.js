@@ -44,4 +44,5 @@ test('Handling different types of alerts', async ({ page }) => {
   });
   await page.click('#promtButton');
   await expect(page.locator('#promptResult')).toContainText('You entered Some Text');
+  
 });
