@@ -16,14 +16,9 @@ test.describe('Saucde demo examples', ()=>{
     // })
 
     test('Sauce login example', async ({page})=>{
-        await page.goto('https://www.saucedemo.com/')
-        await page.locator('//*[@id="user-name"]').fill('standard_user')
-        await page.locator('input[id="password"]').fill('secret_sauce')
-        await page.locator('input[value="Login"]').click()
-        const itemCount =  await page.locator('//*[contains(text(),"T-Shirt")]').count()
-        console.log(itemCount)
+        await page.goto('file:///C:/Users/Nika_Tukhashvili/Downloads/quiz-index1.html')
         await page.waitForTimeout(2000)
-        await page.locator('//*[text()="Sauce Labs Bike Light"]/ancestor::div[@class="inventory_item_label"]/following-sibling::div/button').click()
+
 
     })
 })
