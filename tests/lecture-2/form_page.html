@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Form Page</title>
+    <!-- Bootstrap CSS CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <!-- jQuery CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <!-- Bootstrap JS CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="text-center">Sample Form</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="main-form">
+                            <!-- Text Input 1 -->
+                            <div class="mb-3">
+                                <label for="first-name" class="form-label">First Name</label>
+                                <input type="text" class="form-control" id="first-name" placeholder="Enter your first name">
+                            </div>
+
+                            <!-- Text Input 2 -->
+                            <div class="mb-3">
+                                <label for="last-name" class="form-label">Last Name</label>
+                                <input type="text" class="form-control" id="last-name" placeholder="Enter your last name">
+                            </div>
+
+                            <!-- Text Input 3 -->
+                            <div class="mb-3">
+                                <label for="email-address" class="form-label">Email Address</label>
+                                <input type="email" class="form-control" id="email-address" placeholder="Enter your email">
+                            </div>
+
+                            <!-- Text Input 4 -->
+                            <div class="mb-3">
+                                <label for="phone-number" class="form-label">Phone Number</label>
+                                <input type="tel" class="form-control" id="phone-number" placeholder="Enter your phone number">
+                            </div>
+
+                            <!-- Radio Buttons -->
+                            <div class="mb-3">
+                                <label class="form-label">Gender</label>
+                                <div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender-male" value="male">
+                                        <label class="form-check-label" for="gender-male">Male</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender-female" value="female">
+                                        <label class="form-check-label" for="gender-female">Female</label>
+                                    </div>
+                                    <div class="form-check">
+                                        <input class="form-check-input" type="radio" name="gender" id="gender-other" value="other">
+                                        <label class="form-check-label" for="gender-other">Other</label>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Dropdown -->
+                            <div class="mb-3">
+                                <label for="country-select" class="form-label">Country</label>
+                                <select class="form-select" id="country-select">
+                                    <option value="">Choose your country...</option>
+                                    <option value="us">United States</option>
+                                    <option value="uk">United Kingdom</option>
+                                    <option value="ca">Canada</option>
+                                    <option value="au">Australia</option>
+                                    <option value="de">Germany</option>
+                                    <option value="fr">France</option>
+                                    <option value="jp">Japan</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+
+                            <!-- Confirm Button -->
+                            <div class="d-grid">
+                                <button type="button" class="btn btn-primary btn-lg" id="confirm-button">Confirm</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Result Display Area -->
+                <div id="result-area" class="mt-4" style="display: none;">
+                    <div class="alert alert-success">
+                        <h5>Form Submitted Successfully!</h5>
+                        <div id="form-data"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        $(document).ready(function() {
+            // Confirm button click handler
+            $('#confirm-button').click(function() {
+                // Collect form data
+                const formData = {
+                    firstName: $('#first-name').val(),
+                    lastName: $('#last-name').val(),
+                    email: $('#email-address').val(),
+                    phone: $('#phone-number').val(),
+                    gender: $('input[name="gender"]:checked').val() || 'Not selected',
+                    country: $('#country-select option:selected').text() || 'Not selected'
+                };
+
+                // Display the collected data
+                let dataHtml = '<ul>';
+                dataHtml += '<li><strong>First Name:</strong> ' + formData.firstName + '</li>';
+                dataHtml += '<li><strong>Last Name:</strong> ' + formData.lastName + '</li>';
+                dataHtml += '<li><strong>Email:</strong> ' + formData.email + '</li>';
+                dataHtml += '<li><strong>Phone:</strong> ' + formData.phone + '</li>';
+                dataHtml += '<li><strong>Gender:</strong> ' + formData.gender + '</li>';
+                dataHtml += '<li><strong>Country:</strong> ' + formData.country + '</li>';
+                dataHtml += '</ul>';
+
+                $('#form-data').html(dataHtml);
+                $('#result-area').show();
+
+                // Scroll to result area
+                $('html, body').animate({
+                    scrollTop: $('#result-area').offset().top
+                }, 500);
+            });
+
+            // Add some basic form validation styling
+            $('.form-control, .form-select').on('blur', function() {
+                if ($(this).val() === '') {
+                    $(this).addClass('border-warning');
+                } else {
+                    $(this).removeClass('border-warning').addClass('border-success');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

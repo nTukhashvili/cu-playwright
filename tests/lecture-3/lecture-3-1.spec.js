@@ -1,17 +1,20 @@
 import {expect,test} from '@playwright/test'
 
+// const { test, expect } = require('@playwright/test');
+// const { defineConfig, devices } = require('@playwright/test')
+
 //Open local file
 //Make sure to add 'file:/// to the path'
 
 test.describe("Lecture 3 examples",()=>{
     test("Open local file", async ({page})=>{
-        await page.goto('./sample-locators.html')
+        await page.goto('file:///C:/Users/Nika_Tukhashvili/Desktop/cu-playwright/tests/lecture-3/sample-locators.html')
     })
 
 
     test('Fill form',async ({page})=>{
 
-        await page.goto('./sample-locators.html')
+        await page.goto('file:///C:/Users/Nika_Tukhashvili/Desktop/cu-playwright/tests/lecture-3/sample-locators.html')
         // Basic CSS Selectors
         await page.locator('h1').textContent();
         await page.locator('.form-control').first().fill('Example text');
