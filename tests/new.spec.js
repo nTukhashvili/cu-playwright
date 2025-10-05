@@ -1,16 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Form Automation Tests', () => {
-  
-  test('Fill out and submit form with assertions', async ({ page }) => {
-    await page.goto("Some website")
-    await page.click()
-    await page.fill()
-    await page.selectOption()
 
-
-    });
-});
 
 
 
