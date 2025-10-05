@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automation Testing Demo Page</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/themes/base/jquery-ui.min.css" rel="stylesheet">
+    <style>
+        body {
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        .demo-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+        }
+        .section-title {
+            color: #667eea;
+            margin-bottom: 20px;
+            font-weight: bold;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        /* Sortable List Styles */
+        #sortable-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .sortable-item {
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            cursor: move;
+            transition: all 0.3s;
+        }
+        .sortable-item:hover {
+            background: #e9ecef;
+            transform: scale(1.02);
+        }
+        
+        /* Drag and Drop Styles */
+        .drop-zone {
+            min-height: 150px;
+            border: 3px dashed #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            transition: all 0.3s;
+        }
+        .drop-zone.drag-over {
+            background: #e7e9fc;
+            border-color: #764ba2;
+        }
+        .draggable-item {
+            padding: 12px 20px;
+            margin: 8px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 8px;
+            cursor: move;
+            display: inline-block;
+            font-weight: 500;
+        }
+        
+        /* Grid Styles */
+        .selectable-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        .grid-item {
+            aspect-ratio: 1;
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: bold;
+        }
+        .grid-item:hover {
+            transform: scale(1.05);
+        }
+        .grid-item.selected {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #764ba2;
+        }
+        
+        /* Resizable Box */
+        .resizable-box {
+            width: 200px;
+            height: 150px;
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            border: 3px solid #f5576c;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        /* Slider Display */
+        .slider-value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #667eea;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* Toggle Switch Custom */
+        .custom-switch-lg .form-check-input {
+            width: 3.5rem;
+            height: 1.75rem;
+        }
+        
+        /* Progress Bar */
+        .progress {
+            height: 30px;
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <h1 class="text-center text-white mb-4">🎯 Automation Testing Demo Page</h1>
+        
+        <!-- Form Section -->
+        <div class="demo-container" id="form-section">
+            <h2 class="section-title">📝 Form Elements</h2>
+            <form id="demo-form">
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="input-text" class="form-label">Text Input</label>
+                        <input type="text" class="form-control" id="input-text" name="text-field" placeholder="Enter text here">
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="input-email" class="form-label">Email Input</label>
+                        <input type="email" class="form-control" id="input-email" name="email-field" placeholder="name@example.com">
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6 mb-3">
+                        <label for="select-dropdown" class="form-label">Dropdown Select</label>
+                        <select class="form-select" id="select-dropdown" name="dropdown-field">
+                            <option value="">Choose an option</option>
+                            <option value="option1">Option 1</option>
+                            <option value="option2">Option 2</option>
+                            <option value="option3">Option 3</option>
+                        </select>
+                    </div>
+                    <div class="col-md-6 mb-3">
+                        <label for="input-date" class="form-label">Date Picker</label>
+                        <input type="date" class="form-control" id="input-date" name="date-field">
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Checkboxes</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkbox-1" name="checkbox-option-1">
+                        <label class="form-check-label" for="checkbox-1">Checkbox Option 1</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="checkbox-2" name="checkbox-option-2">
+                        <label class="form-check-label" for="checkbox-2">Checkbox Option 2</label>
+                    </div>
+                </div>
+                
+                <div class="mb-3">
+                    <label class="form-label">Radio Buttons</label>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio-group" id="radio-1" value="radio1">
+                        <label class="form-check-label" for="radio-1">Radio Option 1</label>
+                    </div>
+                    <div class="form-check">
+                        <input class="form-check-input" type="radio" name="radio-group" id="radio-2" value="radio2">
+                        <label class="form-check-label" for="radio-2">Radio Option 2</label>
+                    </div>
+                </div>
+                
+                <button type="submit" class="btn btn-primary" id="btn-submit">Submit Form</button>
+                <button type="reset" class="btn btn-secondary" id="btn-reset">Reset Form</button>
+            </form>
+        </div>
+        
+        <!-- Slider Section -->
+        <div class="demo-container" id="slider-section">
+            <h2 class="section-title">🎚️ Slider Controls</h2>
+            <label for="range-slider" class="form-label">Range Slider</label>
+            <input type="range" class="form-range" id="range-slider" min="0" max="100" value="50">
+            <div class="slider-value" id="slider-value-display">Value: 50</div>
+            
+            <label for="jquery-slider" class="form-label mt-3">jQuery UI Slider</label>
+            <div id="jquery-slider" class="mb-3"></div>
+            <div class="slider-value" id="jquery-slider-value">Value: 30</div>
+        </div>
+        
+        <!-- Toggle Switches -->
+        <div class="demo-container" id="toggle-section">
+            <h2 class="section-title">🔘 Toggle Switches</h2>
+            <div class="form-check form-switch custom-switch-lg mb-3">
+                <input class="form-check-input" type="checkbox" id="toggle-switch-1" checked>
+                <label class="form-check-label" for="toggle-switch-1">Toggle Switch 1 (On/Off)</label>
+            </div>
+            <div class="form-check form-switch custom-switch-lg mb-3">
+                <input class="form-check-input" type="checkbox" id="toggle-switch-2">
+                <label class="form-check-label" for="toggle-switch-2">Toggle Switch 2 (Enable/Disable)</label>
+            </div>
+            <div id="toggle-status" class="alert alert-info">Toggle Status: Switch 1 is ON, Switch 2 is OFF</div>
+        </div>
+        
+        <!-- Sortable List -->
+        <div class="demo-container" id="sortable-section">
+            <h2 class="section-title">📋 Sortable List (Drag to Reorder)</h2>
+            <ul id="sortable-list">
+                <li class="sortable-item" data-item-id="item-1">Item 1 - Drag me!</li>
+                <li class="sortable-item" data-item-id="item-2">Item 2 - Drag me!</li>
+                <li class="sortable-item" data-item-id="item-3">Item 3 - Drag me!</li>
+                <li class="sortable-item" data-item-id="item-4">Item 4 - Drag me!</li>
+                <li class="sortable-item" data-item-id="item-5">Item 5 - Drag me!</li>
+            </ul>
+        </div>
+        
+        <!-- Drag and Drop -->
+        <div class="demo-container" id="dragdrop-section">
+            <h2 class="section-title">🎯 Drag and Drop Zone</h2>
+            <div class="row">
+                <div class="col-md-6">
+                    <h5>Source Items</h5>
+                    <div class="drop-zone" id="source-zone">
+                        <div class="draggable-item" data-drag-id="drag-1">Draggable 1</div>
+                        <div class="draggable-item" data-drag-id="drag-2">Draggable 2</div>
+                        <div class="draggable-item" data-drag-id="drag-3">Draggable 3</div>
+                        <div class="draggable-item" data-drag-id="drag-4">Draggable 4</div>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <h5>Drop Zone</h5>
+                    <div class="drop-zone" id="target-zone">
+                        <p class="text-muted">Drop items here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Selectable Grid -->
+        <div class="demo-container" id="grid-section">
+            <h2 class="section-title">⬛ Selectable Grid (Click to Select)</h2>
+            <div class="selectable-grid" id="selectable-grid">
+                <div class="grid-item" data-grid-id="grid-1">1</div>
+                <div class="grid-item" data-grid-id="grid-2">2</div>
+                <div class="grid-item" data-grid-id="grid-3">3</div>
+                <div class="grid-item" data-grid-id="grid-4">4</div>
+                <div class="grid-item" data-grid-id="grid-5">5</div>
+                <div class="grid-item" data-grid-id="grid-6">6</div>
+                <div class="grid-item" data-grid-id="grid-7">7</div>
+                <div class="grid-item" data-grid-id="grid-8">8</div>
+                <div class="grid-item" data-grid-id="grid-9">9</div>
+                <div class="grid-item" data-grid-id="grid-10">10</div>
+            </div>
+            <button class="btn btn-warning" id="btn-clear-selection">Clear Selection</button>
+            <div id="selection-count" class="alert alert-success mt-3">Selected: 0 items</div>
+        </div>
+        
+        <!-- Resizable Box -->
+        <div class="demo-container" id="resizable-section">
+            <h2 class="section-title">📏 Resizable Box (Drag corners to resize)</h2>
+            <div class="resizable-box" id="resizable-box">
+                Resize Me!
+            </div>
+            <div id="box-dimensions" class="alert alert-info mt-3">Width: 200px, Height: 150px</div>
+        </div>
+        
+        <!-- Alerts Section -->
+        <div class="demo-container" id="alerts-section">
+            <h2 class="section-title">⚠️ Alert Dialogs</h2>
+            <button class="btn btn-success me-2" id="btn-alert">Show Alert</button>
+            <button class="btn btn-warning me-2" id="btn-confirm">Show Confirm</button>
+            <button class="btn btn-info me-2" id="btn-prompt">Show Prompt</button>
+            <div id="alert-result" class="alert alert-secondary mt-3">Click a button to trigger an alert</div>
+        </div>
+        
+        <!-- Progress Bar -->
+        <div class="demo-container" id="progress-section">
+            <h2 class="section-title">📊 Progress Bar</h2>
+            <div class="progress" id="progress-container">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                     id="progress-bar" 
+                     role="progressbar" 
+                     style="width: 0%">0%</div>
+            </div>
+            <button class="btn btn-primary mt-3" id="btn-start-progress">Start Progress</button>
+            <button class="btn btn-danger mt-3" id="btn-reset-progress">Reset Progress</button>
+        </div>
+        
+        <!-- Scroll Section -->
+        <div class="demo-container" id="scroll-section">
+            <h2 class="section-title">📜 Scrollable Area</h2>
+            <div style="height: 200px; overflow-y: scroll; border: 2px solid #dee2e6; padding: 15px; border-radius: 8px;" id="scrollable-area">
+                <p>Scroll down to see more content...</p>
+                <p>Line 1 of scrollable content</p>
+                <p>Line 2 of scrollable content</p>
+                <p>Line 3 of scrollable content</p>
+                <p>Line 4 of scrollable content</p>
+                <p>Line 5 of scrollable content</p>
+                <p>Line 6 of scrollable content</p>
+                <p>Line 7 of scrollable content</p>
+                <p>Line 8 of scrollable content</p>
+                <p>Line 9 of scrollable content</p>
+                <p id="scroll-target">🎯 You found the target!</p>
+            </div>
+            <button class="btn btn-primary mt-3" id="btn-scroll-to-target">Scroll to Target</button>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.13.2/jquery-ui.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    
+    <script>
+        $(document).ready(function() {
+            // Form Submit Handler
+            $('#demo-form').on('submit', function(e) {
+                e.preventDefault();
+                alert('Form submitted successfully! (This is a demo)');
+            });
+            
+            // Range Slider
+            $('#range-slider').on('input', function() {
+                $('#slider-value-display').text('Value: ' + $(this).val());
+            });
+            
+            // jQuery UI Slider
+            $('#jquery-slider').slider({
+                min: 0,
+                max: 100,
+                value: 30,
+                slide: function(event, ui) {
+                    $('#jquery-slider-value').text('Value: ' + ui.value);
+                }
+            });
+            
+            // Toggle Switches
+            $('#toggle-switch-1, #toggle-switch-2').on('change', function() {
+                const toggle1 = $('#toggle-switch-1').is(':checked') ? 'ON' : 'OFF';
+                const toggle2 = $('#toggle-switch-2').is(':checked') ? 'ON' : 'OFF';
+                $('#toggle-status').text(`Toggle Status: Switch 1 is ${toggle1}, Switch 2 is ${toggle2}`);
+            });
+            
+            // Sortable List
+            $('#sortable-list').sortable({
+                placeholder: 'sortable-placeholder',
+                cursor: 'move'
+            });
+            
+            // Drag and Drop
+            $('.draggable-item').draggable({
+                revert: 'invalid',
+                helper: 'clone',
+                cursor: 'move'
+            });
+            
+            $('#source-zone, #target-zone').droppable({
+                accept: '.draggable-item',
+                drop: function(event, ui) {
+                    $(this).append(ui.draggable);
+                    ui.draggable.css({top: 0, left: 0});
+                },
+                over: function() {
+                    $(this).addClass('drag-over');
+                },
+                out: function() {
+                    $(this).removeClass('drag-over');
+                }
+            });
+            
+            // Selectable Grid
+            $('.grid-item').on('click', function() {
+                $(this).toggleClass('selected');
+                updateSelectionCount();
+            });
+            
+            $('#btn-clear-selection').on('click', function() {
+                $('.grid-item').removeClass('selected');
+                updateSelectionCount();
+            });
+            
+            function updateSelectionCount() {
+                const count = $('.grid-item.selected').length;
+                $('#selection-count').text(`Selected: ${count} items`);
+            }
+            
+            // Resizable Box
+            $('#resizable-box').resizable({
+                resize: function(event, ui) {
+                    $('#box-dimensions').text(`Width: ${ui.size.width}px, Height: ${ui.size.height}px`);
+                }
+            });
+            
+            // Alert Buttons
+            $('#btn-alert').on('click', function() {
+                alert('This is a simple alert!');
+                $('#alert-result').text('Alert was shown');
+            });
+            
+            $('#btn-confirm').on('click', function() {
+                const result = confirm('Do you confirm this action?');
+                $('#alert-result').text(`Confirm result: ${result ? 'OK' : 'Cancel'}`);
+            });
+            
+            $('#btn-prompt').on('click', function() {
+                const result = prompt('Please enter your name:');
+                $('#alert-result').text(`Prompt result: ${result || 'Cancelled'}`);
+            });
+            
+            // Progress Bar
+            let progressInterval;
+            
+            $('#btn-start-progress').on('click', function() {
+                let progress = 0;
+                clearInterval(progressInterval);
+                
+                progressInterval = setInterval(function() {
+                    progress += 10;
+                    $('#progress-bar').css('width', progress + '%').text(progress + '%');
+                    
+                    if (progress >= 100) {
+                        clearInterval(progressInterval);
+                    }
+                }, 500);
+            });
+            
+            $('#btn-reset-progress').on('click', function() {
+                clearInterval(progressInterval);
+                $('#progress-bar').css('width', '0%').text('0%');
+            });
+            
+            // Scroll to Target
+            $('#btn-scroll-to-target').on('click', function() {
+                $('#scrollable-area').animate({
+                    scrollTop: $('#scroll-target').position().top
+                }, 1000);
+            });
+        });
+    </script>
+</body>
+</html>

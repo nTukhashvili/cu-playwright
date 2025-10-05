@@ -1,0 +1,25 @@
+{
+  "cookies": [
+    {
+      "name": "saved_session",
+      "value": "session123",
+      "domain": "example.com",
+      "path": "/",
+      "expires": -1,
+      "httpOnly": false,
+      "secure": false,
+      "sameSite": "Lax"
+    }
+  ],
+  "origins": [
+    {
+      "origin": "https://example.com",
+      "localStorage": [
+        {
+          "name": "saved_data",
+          "value": "important_data"
+        }
+      ]
+    }
+  ]
+}
